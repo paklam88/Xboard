@@ -122,6 +122,17 @@ foreach ($seed as $row) {
 $count = (int) $pdo->query('SELECT COUNT(*) FROM v2_knowledge')->fetchColumn();
 echo "done. knowledge_count={$count}\n";
 
+// Drop Laravel admin_settings cache if redis is available (otherwise ThemeService
+// may keep serving the previous frontend_theme until cache expires).
+$redisSock = '/data/redis.sock';
+if (is_file($redisSock) || file_exists($redisSock)) {
+    $cmd = 'redis-cli -s ' . escapeshellarg($redisSock) . ' DEL admin_settings 2>/dev/null';
+    passthru($cmd, $redisCode);
+    echo $redisCode === 0 ? "cleared redis admin_settings\n" : "warn: redis DEL admin_settings exit={$redisCode}\n";
+}
+passthru('php /www/artisan cache:clear 2>/dev/null', $artCode);
+echo "artisan cache:clear exit={$artCode}\n";
+
 // Best-effort: sync Stellar into public/theme so assets resolve without waiting for first hit.
 $src = $root . '/storage/theme/Stellar';
 $dst = $root . '/public/theme/Stellar';
