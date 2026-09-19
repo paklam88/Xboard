@@ -1,22 +1,24 @@
 /**
- * XBoard / Stellar auth — match Landing.vue visual language.
- * Tokens from Landing-Bq97ny1z.css:
- *   dark bg #0a0f1a | light bg #f8fafc | primary #3b82f6
- *   grid + blue/purple glows | glass cards | gradient brand text
+ * XBoard / Stellar auth — always match Landing dark shell.
+ * Landing default: landing_theme_mode dark → bg #0a0f1a, primary #3b82f6.
+ * Do NOT drift into a separate light purple-on-white card look.
  */
 
 .auth-page {
   --auth-bg: #0a0f1a;
-  --auth-ink: #ffffff;
-  --auth-muted: rgba(255, 255, 255, 0.55);
-  --auth-panel: rgba(255, 255, 255, 0.04);
+  --auth-ink: #f8fafc;
+  --auth-muted: rgba(248, 250, 252, 0.58);
+  --auth-panel: rgba(255, 255, 255, 0.045);
   --auth-panel-border: rgba(255, 255, 255, 0.08);
   --auth-primary: #3b82f6;
   --auth-primary-hover: #2563eb;
   --auth-link: #60a5fa;
-  --auth-grid: rgba(59, 130, 246, 0.08);
-  --auth-glow-blue: rgba(59, 130, 246, 0.18);
-  --auth-glow-purple: rgba(139, 92, 246, 0.14);
+  --auth-grid: rgba(59, 130, 246, 0.09);
+  --auth-glow-blue: rgba(59, 130, 246, 0.2);
+  --auth-glow-purple: rgba(139, 92, 246, 0.15);
+  --auth-input-bg: rgba(255, 255, 255, 0.06);
+  --auth-input-border: rgba(255, 255, 255, 0.14);
+  --auth-input-text: #f1f5f9;
 
   position: relative !important;
   min-height: 100vh !important;
@@ -27,24 +29,7 @@
   color: var(--auth-ink) !important;
 }
 
-/* Light mode — same as landing-page:not(.dark) */
-html:not(.dark) .auth-page,
-:root:not(.dark) .auth-page,
-body:not(.dark) .auth-page {
-  --auth-bg: #f8fafc;
-  --auth-ink: #1e293b;
-  --auth-muted: #64748b;
-  --auth-panel: #ffffff;
-  --auth-panel-border: rgba(15, 23, 42, 0.08);
-  --auth-primary: #3b82f6;
-  --auth-primary-hover: #2563eb;
-  --auth-link: #2563eb;
-  --auth-grid: rgba(59, 130, 246, 0.07);
-  --auth-glow-blue: rgba(59, 130, 246, 0.12);
-  --auth-glow-purple: rgba(139, 92, 246, 0.08);
-}
-
-/* Hero-style grid (from .hero-bg-grid) */
+/* Landing hero grid */
 .auth-page::before {
   content: "";
   position: absolute;
@@ -55,12 +40,12 @@ body:not(.dark) .auth-page {
     linear-gradient(var(--auth-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--auth-grid) 1px, transparent 1px);
   background-size: 56px 56px;
-  -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 72%);
-  mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle at 50% 28%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(circle at 50% 28%, #000 0%, transparent 72%);
   animation: xb-auth-grid 18s linear infinite;
 }
 
-/* Blue + purple glows (from .hero-bg-glow / .glow-purple) */
+/* Landing blue + purple glows */
 .auth-page::after {
   content: "";
   position: absolute;
@@ -68,8 +53,8 @@ body:not(.dark) .auth-page {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle 320px at 78% 12%, var(--auth-glow-blue), transparent 70%),
-    radial-gradient(circle 360px at 12% 88%, var(--auth-glow-purple), transparent 70%);
+    radial-gradient(circle 340px at 80% 10%, var(--auth-glow-blue), transparent 70%),
+    radial-gradient(circle 380px at 10% 90%, var(--auth-glow-purple), transparent 70%);
 }
 
 @keyframes xb-auth-grid {
@@ -84,11 +69,8 @@ body:not(.dark) .auth-page {
   }
 }
 
-/* Kill legacy left black brand column — keep one composition */
-.auth-page .auth-brand {
-  display: none !important;
-}
-
+/* Drop the old left black / right white split entirely */
+.auth-page .auth-brand,
 .auth-page .auth-bg,
 .auth-page .auth-overlay {
   display: none !important;
@@ -105,14 +87,10 @@ body:not(.dark) .auth-page {
   background: var(--auth-panel) !important;
   border: 1px solid var(--auth-panel-border) !important;
   border-radius: 16px !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28) !important;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   overflow: visible !important;
-}
-
-html:not(.dark) .auth-page .auth-container {
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08) !important;
 }
 
 .auth-page .auth-form-wrap {
@@ -126,19 +104,20 @@ html:not(.dark) .auth-page .auth-container {
   max-width: 100% !important;
 }
 
-/* Brand — same weight / gradient as landing hero */
 .auth-page .auth-mobile-brand {
   display: block !important;
   text-align: center !important;
   margin: 0 0 28px !important;
 }
 
+/* Same gradient wordmark as landing .gradient-text */
 .auth-page .auth-mobile-brand-title {
   font-size: clamp(2rem, 4.5vw, 2.5rem) !important;
   font-weight: 800 !important;
   letter-spacing: -0.02em !important;
   line-height: 1.1 !important;
   opacity: 1 !important;
+  color: transparent !important;
   background: linear-gradient(120deg, #3b82f6, #60a5fa, #a78bfa, #3b82f6);
   background-size: 220% auto;
   -webkit-background-clip: text;
@@ -178,7 +157,7 @@ html:not(.dark) .auth-page .auth-container {
   display: block !important;
   font-size: 0.9rem !important;
   color: var(--auth-muted) !important;
-  margin-bottom: 28px !important;
+  margin-bottom: 24px !important;
   text-align: left !important;
 }
 
@@ -187,28 +166,81 @@ html:not(.dark) .auth-page .auth-container {
   margin-bottom: 4px !important;
 }
 
-.auth-page .header-btn {
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  background: rgba(255, 255, 255, 0.05) !important;
-  border-radius: 10px !important;
-  color: rgba(255, 255, 255, 0.78) !important;
-}
-
-html:not(.dark) .auth-page .header-btn {
-  border-color: rgba(15, 23, 42, 0.08) !important;
-  background: rgba(15, 23, 42, 0.04) !important;
-  color: rgba(15, 23, 42, 0.72) !important;
+/* Hide theme toggle on auth — landing is dark; flipping to light breaks the shell */
+.auth-page .auth-top-actions {
+  display: none !important;
 }
 
 .auth-page .logo-placeholder {
   background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
 }
 
+.auth-page .auth-link,
+.auth-page .auth-footer,
+.auth-page .language-toggle {
+  color: var(--auth-muted) !important;
+}
+
 .auth-page .auth-link {
   color: var(--auth-link) !important;
 }
 
-/* Primary CTA — landing .cta-btn / .nav-btn.primary */
+.auth-page .auth-footer {
+  color: var(--auth-muted) !important;
+}
+
+/* ---- Inputs: must stay visible on glass (never white-on-white) ---- */
+.auth-page .n-form-item-label,
+.auth-page .n-form-item-label__text {
+  color: var(--auth-muted) !important;
+}
+
+.auth-page .n-input,
+.auth-page .n-base-selection,
+.auth-page .n-input-wrapper {
+  --n-border: 1px solid var(--auth-input-border) !important;
+  --n-border-hover: 1px solid rgba(96, 165, 250, 0.45) !important;
+  --n-border-focus: 1px solid #3b82f6 !important;
+  --n-color: var(--auth-input-bg) !important;
+  --n-color-focus: rgba(255, 255, 255, 0.08) !important;
+  --n-text-color: var(--auth-input-text) !important;
+  --n-placeholder-color: rgba(248, 250, 252, 0.35) !important;
+  --n-caret-color: #60a5fa !important;
+  --n-box-shadow: none !important;
+  background: var(--auth-input-bg) !important;
+  color: var(--auth-input-text) !important;
+  border: 1px solid var(--auth-input-border) !important;
+  border-radius: 10px !important;
+  min-height: 42px !important;
+  box-shadow: none !important;
+}
+
+.auth-page .n-input .n-input__input-el,
+.auth-page .n-input .n-input__textarea-el,
+.auth-page .n-base-selection .n-base-selection-label,
+.auth-page .n-base-selection .n-base-selection-input {
+  color: var(--auth-input-text) !important;
+  -webkit-text-fill-color: var(--auth-input-text) !important;
+  min-height: 40px !important;
+  height: 40px !important;
+}
+
+.auth-page .n-input .n-input__placeholder,
+.auth-page .n-base-selection .n-base-selection-placeholder {
+  color: rgba(248, 250, 252, 0.35) !important;
+}
+
+.auth-page .n-input .n-input__prefix,
+.auth-page .n-input .n-input__suffix,
+.auth-page .n-input .n-base-clear {
+  color: rgba(248, 250, 252, 0.45) !important;
+}
+
+.auth-page .n-checkbox .n-checkbox__label {
+  color: var(--auth-muted) !important;
+}
+
+/* Primary CTA = landing .cta-btn */
 .auth-page .n-button--primary-type {
   --n-color: #3b82f6 !important;
   --n-color-hover: #2563eb !important;
@@ -220,19 +252,35 @@ html:not(.dark) .auth-page .header-btn {
   --n-border-focus: 1px solid #3b82f6 !important;
   --n-text-color: #fff !important;
   --n-ripple-color: #3b82f6 !important;
+  height: 42px !important;
   border-radius: 10px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
 }
 
 .auth-page .n-button--primary-type:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+}
+
+.auth-page .n-button:not(.n-button--primary-type) {
+  --n-text-color: var(--auth-link) !important;
+  color: var(--auth-link) !important;
 }
 
 .auth-page .n-input-group,
 .auth-page .email-input-group {
   width: 100%;
+}
+
+/* Email code send button (register) — keep visible next to input */
+.auth-page .n-input-group .n-button,
+.auth-page .email-input-group .n-button {
+  border: 1px solid var(--auth-input-border) !important;
+  background: rgba(59, 130, 246, 0.15) !important;
+  color: #93c5fd !important;
+  min-height: 42px !important;
 }
 
 @media (max-width: 1023px) {
@@ -261,9 +309,16 @@ html:not(.dark) .auth-page .header-btn {
     display: block !important;
   }
 
+  /* Keep labels readable on mobile too (do not collapse to asterisks-only) */
   .auth-page .auth-login-form .n-form-item-label,
   .auth-page .auth-register-form .n-form-item-label {
-    display: none;
+    display: flex !important;
+  }
+
+  .auth-page .auth-login-form .n-form-item,
+  .auth-page .auth-register-form .n-form-item {
+    grid-template-rows: auto auto auto !important;
+    margin-bottom: 16px !important;
   }
 }
 
