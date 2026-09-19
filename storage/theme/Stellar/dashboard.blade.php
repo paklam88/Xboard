@@ -11,7 +11,7 @@
     @keyframes stellar-loader-spin{to{transform:rotate(360deg)}}
     html:not(.dark) .stellar-page-loader{background:#f8fafc}
   </style>
-  <link rel="stylesheet" href="/theme/{{ $theme }}/auth-atmosphere.css?v=20260919e" />
+  <link rel="stylesheet" href="/theme/{{ $theme }}/auth-atmosphere.css?v=20260919g" />
   <script>
     window.routerBase = '/';
     window.settings = window.settings || {};
@@ -40,7 +40,7 @@
   </script>
   <script type="module" crossorigin src="/theme/{{ $theme }}/assets/stellar.js"></script>
   <link rel="stylesheet" crossorigin href="/theme/{{ $theme }}/assets/index-C-z4KtI8.css">
-  <script src="/theme/{{ $theme }}/auth-chrome.js?v=20260919e" defer></script>
+  <script src="/theme/{{ $theme }}/auth-chrome.js?v=20260919g" defer></script>
 </head>
 <body>
   <div id="app">
