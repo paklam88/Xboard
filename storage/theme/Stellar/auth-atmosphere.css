@@ -1,10 +1,10 @@
 /**
- * XBoard / Stellar auth — always match Landing dark shell.
- * Landing default: landing_theme_mode dark → bg #0a0f1a, primary #3b82f6.
- * Do NOT drift into a separate light purple-on-white card look.
+ * XBoard / Stellar auth — match Landing light + dark.
+ * Shared theme: stellar_dark / html.dark (same as landing).
  */
 
 .auth-page {
+  /* Dark (landing .landing-page.dark) */
   --auth-bg: #0a0f1a;
   --auth-ink: #f8fafc;
   --auth-muted: rgba(248, 250, 252, 0.58);
@@ -19,6 +19,11 @@
   --auth-input-bg: rgba(255, 255, 255, 0.06);
   --auth-input-border: rgba(255, 255, 255, 0.14);
   --auth-input-text: #f1f5f9;
+  --auth-nav-bg: rgba(10, 15, 26, 0.8);
+  --auth-nav-border: rgba(255, 255, 255, 0.06);
+  --auth-nav-btn-bg: rgba(255, 255, 255, 0.05);
+  --auth-nav-btn-border: rgba(255, 255, 255, 0.1);
+  --auth-nav-btn-color: rgba(255, 255, 255, 0.78);
 
   position: relative !important;
   min-height: 100vh !important;
@@ -27,6 +32,97 @@
   overflow: hidden !important;
   background: var(--auth-bg) !important;
   color: var(--auth-ink) !important;
+  padding-top: 64px !important;
+  box-sizing: border-box !important;
+}
+
+/* Light (landing-page:not(.dark) → #f8fafc) */
+html:not(.dark) .auth-page {
+  --auth-bg: #f8fafc;
+  --auth-ink: #1e293b;
+  --auth-muted: #64748b;
+  --auth-panel: #ffffff;
+  --auth-panel-border: rgba(15, 23, 42, 0.08);
+  --auth-link: #2563eb;
+  --auth-grid: rgba(59, 130, 246, 0.07);
+  --auth-glow-blue: rgba(59, 130, 246, 0.12);
+  --auth-glow-purple: rgba(139, 92, 246, 0.08);
+  --auth-input-bg: #ffffff;
+  --auth-input-border: rgba(15, 23, 42, 0.16);
+  --auth-input-text: #0f172a;
+  --auth-nav-bg: rgba(255, 255, 255, 0.8);
+  --auth-nav-border: rgba(0, 0, 0, 0.06);
+  --auth-nav-btn-bg: rgba(15, 23, 42, 0.04);
+  --auth-nav-btn-border: rgba(15, 23, 42, 0.08);
+  --auth-nav-btn-color: rgba(15, 23, 42, 0.72);
+}
+
+/* Landing-style top bar */
+.xb-auth-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: var(--auth-nav-bg);
+  border-bottom: 1px solid var(--auth-nav-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-sizing: border-box;
+}
+
+.xb-auth-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--auth-ink);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.85;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.xb-auth-back:hover {
+  opacity: 1;
+  background: var(--auth-nav-btn-bg);
+  border-color: var(--auth-nav-btn-border);
+}
+
+.xb-auth-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.xb-auth-theme-btn,
+.auth-page .xb-auth-theme-btn.header-btn {
+  width: 38px !important;
+  height: 38px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px !important;
+  border: 1px solid var(--auth-nav-btn-border) !important;
+  background: var(--auth-nav-btn-bg) !important;
+  color: var(--auth-nav-btn-color) !important;
+  cursor: pointer;
+  padding: 0 !important;
+}
+
+.xb-auth-theme-btn:hover,
+.auth-page .xb-auth-theme-btn.header-btn:hover {
+  color: var(--auth-ink) !important;
+  border-color: rgba(59, 130, 246, 0.45) !important;
+  background: rgba(59, 130, 246, 0.12) !important;
 }
 
 /* Landing hero grid */
@@ -45,7 +141,6 @@
   animation: xb-auth-grid 18s linear infinite;
 }
 
-/* Landing blue + purple glows */
 .auth-page::after {
   content: "";
   position: absolute;
@@ -69,7 +164,6 @@
   }
 }
 
-/* Drop the old left black / right white split entirely */
 .auth-page .auth-brand,
 .auth-page .auth-bg,
 .auth-page .auth-overlay {
@@ -83,18 +177,22 @@
   width: min(100%, 440px) !important;
   max-width: 440px !important;
   min-height: 0 !important;
-  margin: 28px 16px !important;
+  margin: 20px 16px !important;
   background: var(--auth-panel) !important;
   border: 1px solid var(--auth-panel-border) !important;
   border-radius: 16px !important;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   overflow: visible !important;
 }
 
+html:not(.dark) .auth-page .auth-container {
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08) !important;
+}
+
 .auth-page .auth-form-wrap {
-  padding: 40px 36px 32px !important;
+  padding: 36px 36px 32px !important;
   max-height: none !important;
   align-items: stretch !important;
   background: transparent !important;
@@ -104,13 +202,17 @@
   max-width: 100% !important;
 }
 
+/* Theme button is moved into .xb-auth-nav by auth-chrome.js */
+.auth-page .auth-top-actions {
+  display: none !important;
+}
+
 .auth-page .auth-mobile-brand {
   display: block !important;
   text-align: center !important;
   margin: 0 0 28px !important;
 }
 
-/* Same gradient wordmark as landing .gradient-text */
 .auth-page .auth-mobile-brand-title {
   font-size: clamp(2rem, 4.5vw, 2.5rem) !important;
   font-weight: 800 !important;
@@ -161,51 +263,36 @@
   text-align: left !important;
 }
 
-.auth-page .auth-top-actions {
-  display: flex !important;
-  margin-bottom: 4px !important;
-}
-
-/* Hide theme toggle on auth — landing is dark; flipping to light breaks the shell */
-.auth-page .auth-top-actions {
-  display: none !important;
-}
-
 .auth-page .logo-placeholder {
   background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-}
-
-.auth-page .auth-link,
-.auth-page .auth-footer,
-.auth-page .language-toggle {
-  color: var(--auth-muted) !important;
 }
 
 .auth-page .auth-link {
   color: var(--auth-link) !important;
 }
 
-.auth-page .auth-footer {
+.auth-page .auth-footer,
+.auth-page .language-toggle {
   color: var(--auth-muted) !important;
 }
 
-/* ---- Inputs: must stay visible on glass (never white-on-white) ---- */
 .auth-page .n-form-item-label,
 .auth-page .n-form-item-label__text {
   color: var(--auth-muted) !important;
 }
 
+/* Inputs always bordered (light + dark) */
 .auth-page .n-input,
 .auth-page .n-base-selection,
 .auth-page .n-input-wrapper {
   --n-border: 1px solid var(--auth-input-border) !important;
-  --n-border-hover: 1px solid rgba(96, 165, 250, 0.45) !important;
+  --n-border-hover: 1px solid rgba(59, 130, 246, 0.45) !important;
   --n-border-focus: 1px solid #3b82f6 !important;
   --n-color: var(--auth-input-bg) !important;
-  --n-color-focus: rgba(255, 255, 255, 0.08) !important;
+  --n-color-focus: var(--auth-input-bg) !important;
   --n-text-color: var(--auth-input-text) !important;
-  --n-placeholder-color: rgba(248, 250, 252, 0.35) !important;
-  --n-caret-color: #60a5fa !important;
+  --n-placeholder-color: color-mix(in srgb, var(--auth-input-text) 38%, transparent) !important;
+  --n-caret-color: #3b82f6 !important;
   --n-box-shadow: none !important;
   background: var(--auth-input-bg) !important;
   color: var(--auth-input-text) !important;
@@ -227,20 +314,19 @@
 
 .auth-page .n-input .n-input__placeholder,
 .auth-page .n-base-selection .n-base-selection-placeholder {
-  color: rgba(248, 250, 252, 0.35) !important;
+  color: color-mix(in srgb, var(--auth-input-text) 38%, transparent) !important;
 }
 
 .auth-page .n-input .n-input__prefix,
 .auth-page .n-input .n-input__suffix,
 .auth-page .n-input .n-base-clear {
-  color: rgba(248, 250, 252, 0.45) !important;
+  color: color-mix(in srgb, var(--auth-input-text) 48%, transparent) !important;
 }
 
 .auth-page .n-checkbox .n-checkbox__label {
   color: var(--auth-muted) !important;
 }
 
-/* Primary CTA = landing .cta-btn */
 .auth-page .n-button--primary-type {
   --n-color: #3b82f6 !important;
   --n-color-hover: #2563eb !important;
@@ -255,13 +341,13 @@
   height: 42px !important;
   border-radius: 10px !important;
   font-weight: 600 !important;
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .auth-page .n-button--primary-type:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
 }
 
 .auth-page .n-button:not(.n-button--primary-type) {
@@ -274,12 +360,11 @@
   width: 100%;
 }
 
-/* Email code send button (register) — keep visible next to input */
 .auth-page .n-input-group .n-button,
 .auth-page .email-input-group .n-button {
   border: 1px solid var(--auth-input-border) !important;
-  background: rgba(59, 130, 246, 0.15) !important;
-  color: #93c5fd !important;
+  background: rgba(59, 130, 246, 0.12) !important;
+  color: var(--auth-link) !important;
   min-height: 42px !important;
 }
 
@@ -288,11 +373,15 @@
     align-items: stretch !important;
   }
 
+  .xb-auth-nav {
+    padding: 0 16px;
+  }
+
   .auth-page .auth-container {
     margin: 0 !important;
     width: 100% !important;
     max-width: none !important;
-    min-height: 100vh !important;
+    min-height: calc(100vh - 64px) !important;
     border-radius: 0 !important;
     border: none !important;
     background: transparent !important;
@@ -301,7 +390,7 @@
   }
 
   .auth-page .auth-form-wrap {
-    padding: 36px 20px 28px !important;
+    padding: 28px 20px 28px !important;
   }
 
   .auth-page .auth-title,
@@ -309,7 +398,6 @@
     display: block !important;
   }
 
-  /* Keep labels readable on mobile too (do not collapse to asterisks-only) */
   .auth-page .auth-login-form .n-form-item-label,
   .auth-page .auth-register-form .n-form-item-label {
     display: flex !important;
@@ -326,5 +414,9 @@
   .auth-page .auth-form-wrap {
     padding-left: 16px !important;
     padding-right: 16px !important;
+  }
+
+  .xb-auth-back-label {
+    font-size: 13px;
   }
 }
