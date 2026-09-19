@@ -22,6 +22,7 @@ services:
       - ./plugins:/www/plugins
       - ./overrides:/www/overrides
       - ./overrides/web.php:/www/routes/web.php
+      - ./scripts:/www/scripts
       - redis-data:/data
     environment:
       - RESOURCE_PROFILE=balanced      # minimal | balanced | performance | auto
