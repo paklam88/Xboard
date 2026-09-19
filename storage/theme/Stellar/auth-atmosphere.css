@@ -1,106 +1,132 @@
 /**
- * XBoard / Stellar — auth pages (login / register / forget)
- * Soft atmosphere, no harsh black|white split panel.
- * Loaded from dashboard.blade.php; cache-bust via ?v= query if needed.
+ * XBoard / Stellar auth — match Landing.vue visual language.
+ * Tokens from Landing-Bq97ny1z.css:
+ *   dark bg #0a0f1a | light bg #f8fafc | primary #3b82f6
+ *   grid + blue/purple glows | glass cards | gradient brand text
  */
 
-:root {
-  --xb-auth-accent: #0e7490;
-  --xb-auth-accent-soft: #0891b2;
-  --xb-auth-ink: #0f172a;
-  --xb-auth-muted: #64748b;
-  --xb-auth-panel: rgba(255, 255, 255, 0.78);
-  --xb-auth-panel-border: rgba(15, 23, 42, 0.06);
-  --xb-auth-glow-a: rgba(14, 165, 233, 0.16);
-  --xb-auth-glow-b: rgba(45, 212, 191, 0.12);
-  --xb-auth-base-0: #eef6f9;
-  --xb-auth-base-1: #e8eef4;
-  --xb-auth-base-2: #f4f7fa;
-}
-
-html.dark,
-.dark {
-  --xb-auth-accent: #22d3ee;
-  --xb-auth-accent-soft: #67e8f9;
-  --xb-auth-ink: #f1f5f9;
-  --xb-auth-muted: #94a3b8;
-  --xb-auth-panel: rgba(15, 23, 42, 0.72);
-  --xb-auth-panel-border: rgba(148, 163, 184, 0.14);
-  --xb-auth-glow-a: rgba(34, 211, 238, 0.14);
-  --xb-auth-glow-b: rgba(56, 189, 248, 0.1);
-  --xb-auth-base-0: #0b1220;
-  --xb-auth-base-1: #111827;
-  --xb-auth-base-2: #0f172a;
-}
-
-/* Full-viewport atmosphere — replaces flat split */
 .auth-page {
+  --auth-bg: #0a0f1a;
+  --auth-ink: #ffffff;
+  --auth-muted: rgba(255, 255, 255, 0.55);
+  --auth-panel: rgba(255, 255, 255, 0.04);
+  --auth-panel-border: rgba(255, 255, 255, 0.08);
+  --auth-primary: #3b82f6;
+  --auth-primary-hover: #2563eb;
+  --auth-link: #60a5fa;
+  --auth-grid: rgba(59, 130, 246, 0.08);
+  --auth-glow-blue: rgba(59, 130, 246, 0.18);
+  --auth-glow-purple: rgba(139, 92, 246, 0.14);
+
+  position: relative !important;
   min-height: 100vh !important;
   align-items: center !important;
   justify-content: center !important;
-  background:
-    radial-gradient(ellipse 90% 70% at 12% 8%, var(--xb-auth-glow-a), transparent 55%),
-    radial-gradient(ellipse 80% 60% at 92% 88%, var(--xb-auth-glow-b), transparent 52%),
-    linear-gradient(168deg, var(--xb-auth-base-0) 0%, var(--xb-auth-base-1) 48%, var(--xb-auth-base-2) 100%) !important;
-  animation: xb-auth-breathe 18s ease-in-out infinite alternate;
+  overflow: hidden !important;
+  background: var(--auth-bg) !important;
+  color: var(--auth-ink) !important;
 }
 
-@keyframes xb-auth-breathe {
-  from {
-    filter: saturate(1);
-  }
+/* Light mode — same as landing-page:not(.dark) */
+html:not(.dark) .auth-page,
+:root:not(.dark) .auth-page,
+body:not(.dark) .auth-page {
+  --auth-bg: #f8fafc;
+  --auth-ink: #1e293b;
+  --auth-muted: #64748b;
+  --auth-panel: #ffffff;
+  --auth-panel-border: rgba(15, 23, 42, 0.08);
+  --auth-primary: #3b82f6;
+  --auth-primary-hover: #2563eb;
+  --auth-link: #2563eb;
+  --auth-grid: rgba(59, 130, 246, 0.07);
+  --auth-glow-blue: rgba(59, 130, 246, 0.12);
+  --auth-glow-purple: rgba(139, 92, 246, 0.08);
+}
+
+/* Hero-style grid (from .hero-bg-grid) */
+.auth-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--auth-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--auth-grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 72%);
+  animation: xb-auth-grid 18s linear infinite;
+}
+
+/* Blue + purple glows (from .hero-bg-glow / .glow-purple) */
+.auth-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 320px at 78% 12%, var(--auth-glow-blue), transparent 70%),
+    radial-gradient(circle 360px at 12% 88%, var(--auth-glow-purple), transparent 70%);
+}
+
+@keyframes xb-auth-grid {
   to {
-    filter: saturate(1.06);
+    background-position: 56px 56px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .auth-page {
+  .auth-page::before {
     animation: none;
   }
 }
 
-/* Hide legacy left black brand column */
+/* Kill legacy left black brand column — keep one composition */
 .auth-page .auth-brand {
   display: none !important;
 }
 
-/* Soft single composition — not a card stack */
+.auth-page .auth-bg,
+.auth-page .auth-overlay {
+  display: none !important;
+}
+
 .auth-page .auth-container {
+  position: relative;
+  z-index: 2;
   display: block !important;
   width: min(100%, 440px) !important;
   max-width: 440px !important;
   min-height: 0 !important;
   margin: 28px 16px !important;
-  background: var(--xb-auth-panel) !important;
-  border: 1px solid var(--xb-auth-panel-border) !important;
-  border-radius: 20px !important;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.55) inset,
-    0 18px 48px rgba(15, 23, 42, 0.08) !important;
-  backdrop-filter: blur(18px) saturate(1.15);
-  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  background: var(--auth-panel) !important;
+  border: 1px solid var(--auth-panel-border) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   overflow: visible !important;
 }
 
-html.dark .auth-page .auth-container,
-.dark .auth-page .auth-container {
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 22px 56px rgba(0, 0, 0, 0.35) !important;
+html:not(.dark) .auth-page .auth-container {
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08) !important;
 }
 
 .auth-page .auth-form-wrap {
   padding: 40px 36px 32px !important;
   max-height: none !important;
   align-items: stretch !important;
+  background: transparent !important;
 }
 
 .auth-page .auth-form-inner {
   max-width: 100% !important;
 }
 
-/* Brand always visible (was mobile-only when left panel existed) */
+/* Brand — same weight / gradient as landing hero */
 .auth-page .auth-mobile-brand {
   display: block !important;
   text-align: center !important;
@@ -108,31 +134,42 @@ html.dark .auth-page .auth-container,
 }
 
 .auth-page .auth-mobile-brand-title {
-  font-size: clamp(2rem, 5vw, 2.75rem) !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.03em !important;
-  line-height: 1.05 !important;
-  color: var(--xb-auth-ink) !important;
+  font-size: clamp(2rem, 4.5vw, 2.5rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
   opacity: 1 !important;
-  background: linear-gradient(120deg, var(--xb-auth-ink) 20%, var(--xb-auth-accent-soft) 120%);
+  background: linear-gradient(120deg, #3b82f6, #60a5fa, #a78bfa, #3b82f6);
+  background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: xb-auth-grad 4.5s ease-in-out infinite;
+}
+
+@keyframes xb-auth-grad {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
 }
 
 .auth-page .auth-mobile-brand-desc {
   margin-top: 10px !important;
   font-size: 0.95rem !important;
-  color: var(--xb-auth-muted) !important;
+  color: var(--auth-muted) !important;
   line-height: 1.5 !important;
+  -webkit-text-fill-color: var(--auth-muted);
 }
 
-/* Welcome line under brand */
 .auth-page .auth-title {
   display: block !important;
-  font-size: 1.25rem !important;
-  font-weight: 650 !important;
-  color: var(--xb-auth-ink) !important;
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  color: var(--auth-ink) !important;
   margin-bottom: 6px !important;
   text-align: left !important;
 }
@@ -140,57 +177,59 @@ html.dark .auth-page .auth-container,
 .auth-page .auth-subtitle {
   display: block !important;
   font-size: 0.9rem !important;
-  color: var(--xb-auth-muted) !important;
+  color: var(--auth-muted) !important;
   margin-bottom: 28px !important;
   text-align: left !important;
 }
 
 .auth-page .auth-top-actions {
   display: flex !important;
-  margin-bottom: 8px !important;
+  margin-bottom: 4px !important;
+}
+
+.auth-page .header-btn {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 10px !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+html:not(.dark) .auth-page .header-btn {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  background: rgba(15, 23, 42, 0.04) !important;
+  color: rgba(15, 23, 42, 0.72) !important;
 }
 
 .auth-page .logo-placeholder {
-  background: linear-gradient(135deg, #0e7490, #0284c7) !important;
+  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
 }
 
 .auth-page .auth-link {
-  color: var(--xb-auth-accent) !important;
+  color: var(--auth-link) !important;
 }
 
-/* Primary CTA — cyan/teal, not purple */
+/* Primary CTA — landing .cta-btn / .nav-btn.primary */
 .auth-page .n-button--primary-type {
-  --n-color: #0e7490 !important;
-  --n-color-hover: #0f766e !important;
-  --n-color-pressed: #115e59 !important;
-  --n-color-focus: #0e7490 !important;
-  --n-border: 1px solid #0e7490 !important;
-  --n-border-hover: 1px solid #0f766e !important;
-  --n-border-pressed: 1px solid #115e59 !important;
-  --n-border-focus: 1px solid #0e7490 !important;
+  --n-color: #3b82f6 !important;
+  --n-color-hover: #2563eb !important;
+  --n-color-pressed: #1d4ed8 !important;
+  --n-color-focus: #3b82f6 !important;
+  --n-border: 1px solid #3b82f6 !important;
+  --n-border-hover: 1px solid #2563eb !important;
+  --n-border-pressed: 1px solid #1d4ed8 !important;
+  --n-border-focus: 1px solid #3b82f6 !important;
   --n-text-color: #fff !important;
-  --n-ripple-color: #0e7490 !important;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-  box-shadow: 0 8px 20px rgba(14, 116, 144, 0.22);
+  --n-ripple-color: #3b82f6 !important;
+  border-radius: 10px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
 }
 
 .auth-page .n-button--primary-type:hover {
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
 }
 
-html.dark .auth-page .n-button--primary-type,
-.dark .auth-page .n-button--primary-type {
-  --n-color: #0891b2 !important;
-  --n-color-hover: #06b6d4 !important;
-  --n-color-pressed: #0e7490 !important;
-  --n-border: 1px solid #0891b2 !important;
-  --n-border-hover: 1px solid #06b6d4 !important;
-  --n-border-pressed: 1px solid #0e7490 !important;
-  --n-border-focus: 1px solid #0891b2 !important;
-  box-shadow: 0 8px 22px rgba(8, 145, 178, 0.28);
-}
-
-/* Keep email verify / code UI readable */
 .auth-page .n-input-group,
 .auth-page .email-input-group {
   width: 100%;
@@ -217,7 +256,6 @@ html.dark .auth-page .n-button--primary-type,
     padding: 36px 20px 28px !important;
   }
 
-  /* Theme originally hid desktop titles on mobile — keep brand + welcome */
   .auth-page .auth-title,
   .auth-page .auth-subtitle {
     display: block !important;
