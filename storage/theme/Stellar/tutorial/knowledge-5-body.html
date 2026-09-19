@@ -116,6 +116,19 @@
 </div>
 <p style="margin:0 0 12px;font-size:12px;color:#64748b">来源文案：<a href="https://github.com/bannedbook/fanqiang/blob/master/ios/Shadowrocket.md" target="_blank" rel="noopener noreferrer">fanqiang Shadowrocket.md</a>「开始使用」段落（无独立配图，不仿图）。</p>
 
+<h3>B9. Telegram 不同步 / 没通知（必查）</h3>
+<div style="margin:12px 0;padding:14px 16px;border-radius:12px;background:#fff7ed;border:1px solid #fdba74;color:#9a3412">
+<p style="margin:0 0 8px;font-size:14px;font-weight:600;line-height:1.5">iPhone 开着 Shadowsocks（Shadowrocket）时，TG 打不开新消息、也没提醒——多半是分流 / 苹果推送（APNs）没走对，不是「节点坏了」这么简单。</p>
+<p style="margin:0;font-size:13px;line-height:1.6">完整步骤见知识库：<strong>「iPhone：Telegram 不同步 / 没通知」</strong>。下面是最短排查：</p>
+</div>
+<ol>
+<li><strong>先分清两种症状</strong>：打开 Telegram 也刷不出新消息 = 同步问题；打开能看到消息但锁屏没提醒 = 推送问题。两种修法不同。</li>
+<li><strong>同步问题</strong>：首页「全局路由」临时改成「代理」→ 完全退出 Telegram 再打开。若这时能同步，说明当前「配置」规则没覆盖 Telegram，需加远程分流规则（见 B6）或换更全的规则，再改回「配置」。</li>
+<li><strong>推送问题</strong>：Shadowrocket → 设置 → 隧道 → 打开「包括 APNs」（建议同时开「包括所有网络」）→ 打开一次飞行模式约 10 秒再关掉，重建推送通道。</li>
+<li><strong>系统权限</strong>：iPhone 设置 → Telegram → 通知打开；「后台 App 刷新」打开。</li>
+<li>仍不行：换一个延迟更低的节点，确认节点支持 UDP；再测一次「代理」模式对照。</li>
+</ol>
+
 <p style="font-size:12px;color:#64748b;margin-top:16px">iPhone 客户端图全部来自 <a href="https://github.com/bannedbook/fanqiang/blob/master/ios/Shadowrocket.md" target="_blank" rel="noopener noreferrer">https://github.com/bannedbook/fanqiang/blob/master/ios/Shadowrocket.md</a>，未使用任何 Android 客户端截图。</p>
 
-<p><em>缓存版本：20260918split。相关下载说明见知识库「下载客户端」；本文只负责导入订阅且平台严格分离。</em></p>
+<p><em>缓存版本：20260919tg。相关下载说明见知识库「下载客户端」；本文只负责导入订阅且平台严格分离。</em></p>

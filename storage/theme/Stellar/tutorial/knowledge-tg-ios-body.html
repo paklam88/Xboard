@@ -1,0 +1,60 @@
+<p><img src="/theme/Stellar/tutorial/06-faq.svg" alt="Telegram 排查" style="max-width:min(100%,420px);width:auto;height:auto;max-height:min(70vh,720px);object-fit:contain;border-radius:12px;display:block;margin:12px auto"/></p>
+
+<p style="margin:12px 0;padding:12px 14px;border-radius:12px;background:#f1f5f9;font-size:14px;line-height:1.6">
+针对：<strong>iPhone + Shadowrocket（Shadowsocks）</strong> 时 Telegram <strong>消息不同步</strong>、<strong>没有通知提醒</strong>。<br/>
+Android / Clash 用户请勿照抄本节按钮名称。
+</p>
+
+<h2>先分清：同步坏了，还是推送坏了</h2>
+<ol>
+<li><strong>同步问题</strong>：打开 Telegram，下拉刷新也出不来新消息，对话像卡住。</li>
+<li><strong>推送问题</strong>：打开 App 能看到新消息，但锁屏 / 通知中心没有提醒。</li>
+</ol>
+<p>两种原因不同：同步靠 Telegram 服务器走代理；提醒靠苹果 APNs。很多规则会代理 TG，却把苹果推送直连（或反过来），就会「能用但没铃」或「铃也不响、消息也不来」。</p>
+
+<h2>一、系统权限（30 秒）</h2>
+<ol>
+<li>iPhone「设置」→ Telegram →「通知」全部打开。</li>
+<li>同一页打开「后台 App 刷新」。</li>
+<li>「设置」→「专注模式 / 勿扰」确认没有屏蔽 Telegram。</li>
+</ol>
+
+<h2>二、同步修不好：先用「代理」对照</h2>
+<ol>
+<li>打开 Shadowrocket 首页 →「全局路由」。</li>
+<li>临时改成<strong>「代理」</strong>（全部流量走节点）。</li>
+<li>从多任务里完全滑掉 Telegram，再重新打开，看能否拉到新消息。</li>
+</ol>
+<div style="margin:12px 0;padding:14px 16px;border-radius:12px;background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46">
+<p style="margin:0;font-size:13px;line-height:1.55"><strong>能同步了</strong>：节点本身没问题，是「配置 / 规则」没把 Telegram 走代理。请回到导入教程 B6 添加远程分流规则，并在 B7 把全局路由改回「配置」。规则生效后，再测一次打开 TG 能否同步。</p>
+</div>
+<div style="margin:12px 0;padding:14px 16px;border-radius:12px;background:#fef2f2;border:1px solid #fca5a5;color:#991b1b">
+<p style="margin:0;font-size:13px;line-height:1.55"><strong>「代理」也不行</strong>：换延迟更低的节点；确认订阅已更新；测一下浏览器能否打开 google.com。仍不行再联系客服查套餐 / 节点。</p>
+</div>
+
+<h2>三、有同步、没提醒：修苹果推送（APNs）</h2>
+<p>大陆等网络环境下，苹果推送域名直连经常不稳定。需要让 APNs 也走代理，并让小火箭接管隧道。</p>
+<ol>
+<li>Shadowrocket → 底部「设置」→「隧道」。</li>
+<li>打开 <strong>「包括 APNs」</strong>。</li>
+<li>建议同时打开 <strong>「包括所有网络」</strong>（蜂窝数据下推送也更稳）。</li>
+<li>打开 iPhone「飞行模式」约 10 秒，再关掉（强制重建推送连接）。</li>
+<li>用另一台设备给自己发一条 Telegram 消息，锁屏看有没有横幅。</li>
+</ol>
+<p>若仍无提醒：当前使用的「配置」里点右侧「i」→ 确认<strong>不要</strong>开启会把系统流量旁路掉的选项（有的版本叫「旁路系统」；应关闭，否则推送时好时坏）。</p>
+
+<h2>四、UDP（可选，但建议开）</h2>
+<ol>
+<li>Shadowrocket 设置里确认 UDP 相关转发已开启（不同版本文案为「UDP 转发 / UDP Relay」）。</li>
+<li>节点需支持 UDP。不支持时，Telegram 可能偶发卡顿或重连慢。</li>
+</ol>
+
+<h2>五、推荐长期组合</h2>
+<ul>
+<li>全局路由日常用 <strong>「配置」</strong>（省流量、国内 App 更顺）。</li>
+<li>远程规则覆盖 Telegram + 苹果推送相关域名。</li>
+<li>隧道打开「包括 APNs」。</li>
+<li>只有排查时才短暂用「代理」；长期全局「代理」费流量，也可能拖慢部分系统服务。</li>
+</ul>
+
+<p style="font-size:12px;color:#64748b;margin-top:16px">导入步骤见「如何导入节点 / 订阅」iPhone 章节（B6 / B7 / B9）。本文不配仿图，避免与真机界面不一致。</p>
