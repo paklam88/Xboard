@@ -11,7 +11,7 @@
     (function () {
       var path = (location.pathname || '/').replace(/\/+$/, '') || '/';
       if (/^\/(login|register|forget)$/.test(path)) {
-        try { localStorage.setItem('stellar_dark', '1'); } catch (e) {}
+        try { localStorage.setItem('stellar_dark', 'true'); } catch (e) {}
         document.documentElement.classList.add('dark');
       }
     })();
