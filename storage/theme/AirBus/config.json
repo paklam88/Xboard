@@ -1,0 +1,22 @@
+{
+  "name": "AirBus",
+  "description": "Community theme based on vlesstop/v2board-theme-buddy (AirBus). Landing page + knowledge base. Free/open.",
+  "version": "1.0.1",
+  "images": "",
+  "configs": [
+    {
+      "label": "站点标题(同步到 config.js 需手工改)",
+      "placeholder": "显示名提示",
+      "field_name": "site_title",
+      "field_type": "input",
+      "default_value": "XBoard Demo"
+    },
+    {
+      "label": "自定义页脚HTML",
+      "placeholder": "客服/统计代码",
+      "field_name": "custom_html",
+      "field_type": "textarea",
+      "default_value": ""
+    }
+  ]
+}

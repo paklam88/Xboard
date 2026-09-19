@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XBoard — 高速稳定的网络加速服务</title>
+  <meta name="description" content="注册、订阅、导入客户端，几分钟开始使用。提供知识库教程与多端支持。" />
+  <link rel="icon" href="/theme/AirBus/favicon.ico" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-2: #111a2e;
+      --card: rgba(255,255,255,.06);
+      --line: rgba(255,255,255,.12);
+      --text: #eef3ff;
+      --muted: #9aa8c7;
+      --brand: #3b82f6;
+      --brand-2: #60a5fa;
+      --ok: #34d399;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "SF Pro Display", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,.35), transparent 55%),
+        radial-gradient(900px 500px at 90% 0%, rgba(16,185,129,.18), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 70%);
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 0; position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(7,11,20,.55);
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled { border-bottom-color: var(--line); }
+    .brand { display: flex; gap: .7rem; align-items: center; font-weight: 700; letter-spacing: .02em; }
+    .logo {
+      width: 2rem; height: 2rem; border-radius: .7rem;
+      background: linear-gradient(135deg, var(--brand), #22d3ee);
+      box-shadow: 0 8px 24px rgba(59,130,246,.35);
+    }
+    .nav-links { display: flex; gap: 1.25rem; align-items: center; color: var(--muted); font-size: .95rem; }
+    .nav-links a:hover { color: var(--text); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+      border-radius: .85rem; padding: .75rem 1.15rem; font-weight: 600; border: 1px solid transparent;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), #2563eb);
+      box-shadow: 0 10px 30px rgba(37,99,235,.35);
+    }
+    .btn-ghost { border-color: var(--line); background: rgba(255,255,255,.03); color: var(--text); }
+    .hero {
+      display: grid; grid-template-columns: 1.15fr .85fr; gap: 2.5rem; align-items: center;
+      padding: 4.5rem 0 3.5rem;
+    }
+    .eyebrow {
+      display: inline-flex; gap: .5rem; align-items: center;
+      color: var(--brand-2); font-size: .85rem; font-weight: 600;
+      padding: .35rem .7rem; border: 1px solid rgba(96,165,250,.35); border-radius: 999px;
+      background: rgba(59,130,246,.12);
+      animation: fadeUp .7s ease both;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.12; margin: 1rem 0 .9rem;
+      letter-spacing: -.02em; animation: fadeUp .8s .05s ease both;
+    }
+    .lead {
+      color: var(--muted); font-size: 1.08rem; line-height: 1.7; max-width: 36rem;
+      margin: 0 0 1.6rem; animation: fadeUp .8s .12s ease both;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; animation: fadeUp .8s .18s ease both; }
+    .note { margin-top: 1rem; color: #7f8eae; font-size: .88rem; animation: fadeUp .8s .24s ease both; }
+    .panel {
+      border: 1px solid var(--line); border-radius: 1.4rem; background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      padding: 1.25rem; box-shadow: 0 30px 80px rgba(0,0,0,.35);
+      animation: floatIn .9s .15s ease both;
+    }
+    .panel h3 { margin: 0 0 .8rem; font-size: 1rem; color: var(--brand-2); }
+    .steps { display: grid; gap: .7rem; }
+    .step {
+      display: grid; grid-template-columns: auto 1fr; gap: .8rem; align-items: start;
+      padding: .85rem .9rem; border-radius: 1rem; background: rgba(0,0,0,.22); border: 1px solid var(--line);
+    }
+    .num {
+      width: 1.7rem; height: 1.7rem; border-radius: .55rem; display: grid; place-items: center;
+      background: rgba(59,130,246,.2); color: var(--brand-2); font-weight: 700; font-size: .85rem;
+    }
+    .step strong { display: block; margin-bottom: .2rem; }
+    .step span { color: var(--muted); font-size: .9rem; line-height: 1.45; }
+    section { padding: 2.8rem 0; }
+    .section-title { font-size: 1.7rem; margin: 0 0 .5rem; }
+    .section-desc { color: var(--muted); margin: 0 0 1.6rem; max-width: 40rem; line-height: 1.6; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .card {
+      border: 1px solid var(--line); border-radius: 1.2rem; padding: 1.2rem;
+      background: var(--card); min-height: 9.5rem;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+    .card:hover { border-color: rgba(96,165,250,.45); transform: translateY(-2px); }
+    .card h3 { margin: 0 0 .55rem; font-size: 1.05rem; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.55; font-size: .95rem; }
+    .faq { display: grid; gap: .75rem; }
+    details {
+      border: 1px solid var(--line); border-radius: 1rem; padding: 1rem 1.1rem; background: rgba(255,255,255,.03);
+    }
+    summary { cursor: pointer; font-weight: 600; }
+    details p { color: var(--muted); line-height: 1.6; margin: .7rem 0 0; }
+    .cta-band {
+      margin: 1rem 0 3rem; border: 1px solid rgba(96,165,250,.28);
+      border-radius: 1.4rem; padding: 1.8rem;
+      background:
+        radial-gradient(600px 180px at 0% 0%, rgba(59,130,246,.25), transparent 60%),
+        rgba(255,255,255,.04);
+      display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap;
+    }
+    footer { border-top: 1px solid var(--line); color: var(--muted); padding: 1.4rem 0 2rem; font-size: .9rem; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(18px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @media (max-width: 860px) {
+      .hero, .grid { grid-template-columns: 1fr; }
+      .nav-links .hide-sm { display: none; }
+      .hero { padding-top: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav" id="nav">
+      <a class="brand" href="/"><span class="logo" aria-hidden="true"></span><span>XBoard</span></a>
+      <nav class="nav-links">
+        <a class="hide-sm" href="#features">能力</a>
+        <a class="hide-sm" href="#howto">上手</a>
+        <a class="hide-sm" href="#faq">FAQ</a>
+        <a class="btn btn-ghost" href="/login">登录</a>
+        <a class="btn btn-primary" href="/register">免费注册</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">本地演示站 · 可改文案</div>
+          <h1>更快连接，更少折腾<br/>从注册到上网只需几分钟</h1>
+          <p class="lead">
+            这是 XBoard 的宣传落地页：了解服务 → 注册账号 → 购买订阅 → 下载客户端并导入节点。
+            详细图文教程在登录后的知识库中。
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="/register">立即开始</a>
+            <a class="btn btn-ghost" href="/login">已有账号登录</a>
+            <a class="btn btn-ghost" href="/dashboard/knowledge">查看使用教程</a>
+          </div>
+          <p class="note">知识库需登录后访问。演示用户：user@demo.com / UserDemo123!</p>
+        </div>
+        <aside class="panel" aria-label="上手步骤">
+          <h3>4 步开始使用</h3>
+          <div class="steps">
+            <div class="step"><div class="num">1</div><div><strong>注册账号</strong><span>邮箱注册，本演示已关闭强制邀请码。</span></div></div>
+            <div class="step"><div class="num">2</div><div><strong>选择套餐</strong><span>在商店订阅合适周期（需管理员配置套餐/支付）。</span></div></div>
+            <div class="step"><div class="num">3</div><div><strong>下载客户端</strong><span>Windows / macOS / Android / iOS 均可。</span></div></div>
+            <div class="step"><div class="num">4</div><div><strong>导入订阅</strong><span>复制订阅链接，一键导入节点即可连接。</span></div></div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="features">
+        <h2 class="section-title">你能得到什么</h2>
+        <p class="section-desc">面向真实使用路径设计，而不是只放登录框。</p>
+        <div class="grid">
+          <article class="card"><h3>多端客户端</h3><p>桌面与移动端导入同一订阅，换设备不用重新摸索。</p></article>
+          <article class="card"><h3>知识库教程</h3><p>注册、购买、下载、导入、FAQ 都已预置中文占位文档，可在后台修改。</p></article>
+          <article class="card"><h3>订单与订阅</h3><p>用户中心查看流量、到期时间与订单状态，续费路径清晰。</p></article>
+        </div>
+      </section>
+
+      <section id="howto">
+        <h2 class="section-title">推荐阅读顺序</h2>
+        <p class="section-desc">登录后打开知识库，按下面顺序看即可。</p>
+        <div class="grid">
+          <a class="card" href="/dashboard/knowledge/1"><h3>① 如何注册</h3><p>从落地页进入注册页，完成账号创建。</p></a>
+          <a class="card" href="/dashboard/knowledge/3"><h3>② 购买订阅</h3><p>选择套餐并完成订单（支付需后台配置）。</p></a>
+          <a class="card" href="/dashboard/knowledge/5"><h3>③ 导入节点</h3><p>复制订阅链接到客户端，更新后选择节点。</p></a>
+        </div>
+      </section>
+
+      <section id="faq">
+        <h2 class="section-title">常见问题</h2>
+        <div class="faq">
+          <details open>
+            <summary>这是落地页吗？和登录页有什么区别？</summary>
+            <p>是。当前 `/` 为独立宣传落地页；`/login`、`/register` 才是账号表单。登录后可进入仪表盘与知识库。</p>
+          </details>
+          <details>
+            <summary>知识库为什么要点登录？</summary>
+            <p>Xboard 知识库接口挂在用户端。游客可在本页了解流程，登录后阅读完整教程。</p>
+          </details>
+          <details>
+            <summary>文案和教程可以改吗？</summary>
+            <p>可以。落地页在 `overrides/landing.html`；知识库在管理后台「知识库」中编辑。</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="cta-band">
+        <div>
+          <h2 class="section-title" style="margin:0">准备好了就注册</h2>
+          <p class="section-desc" style="margin:.4rem 0 0">注册后可直接进入用户中心与知识库。</p>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/register">免费注册</a>
+          <a class="btn btn-ghost" href="/login">登录</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>XBoard 本地演示 · 落地页可改 · 主题 AirBus</div>
+    </footer>
+  </div>
+  <script>
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  </script>
+</body>
+</html>

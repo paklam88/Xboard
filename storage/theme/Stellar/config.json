@@ -1,0 +1,15 @@
+{
+  "name": "Stellar",
+  "description": "Community theme with landing page + knowledge base (aklibk86-dev/stellar)",
+  "version": "1.0.0",
+  "images": "",
+  "configs": [
+    {
+      "label": "说明",
+      "placeholder": "站点文案请改 storage/theme/Stellar/env.js",
+      "field_name": "note",
+      "field_type": "input",
+      "default_value": "编辑 env.js 配置落地页与 API"
+    }
+  ]
+}

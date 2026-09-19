@@ -13,13 +13,15 @@ services:
     image: ghcr.io/cedar2025/xboard:latest
     restart: unless-stopped
     ports:
-      - "7001:7001"
+      - "17421:7001"
     volumes:
       - ./.env:/www/.env
       - ./.docker/.data/:/www/.docker/.data
       - ./storage/logs:/www/storage/logs
       - ./storage/theme:/www/storage/theme
       - ./plugins:/www/plugins
+      - ./overrides:/www/overrides
+      - ./overrides/web.php:/www/routes/web.php
       - redis-data:/data
     environment:
       - RESOURCE_PROFILE=balanced      # minimal | balanced | performance | auto

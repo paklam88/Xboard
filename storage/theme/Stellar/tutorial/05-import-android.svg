@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1554" viewBox="0 0 720 1554">
+  <rect width="720" height="1554" rx="24" fill="#020617"/>
+  <rect x="0" y="0" width="720" height="100" fill="#020617"/>
+  <text x="24" y="64" font-size="34" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#f8fafc" font-weight="800">Android 导入订阅（逐步）</text>
+
+  <rect x="24" y="120" width="672" height="128" rx="18" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <circle cx="68" cy="184.0" r="30" fill="#06b6d4"/>
+  <text x="68" y="195.0" text-anchor="middle" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#fff" font-weight="800">1</text>
+  <text x="114" y="160" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#f8fafc" font-weight="800">手机浏览器登录本站</text>
+  <text x="114" y="194" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#cbd5e1">用手机打开网站并登录账号</text>
+
+  <rect x="24" y="262" width="672" height="128" rx="18" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <circle cx="68" cy="326.0" r="30" fill="#06b6d4"/>
+  <text x="68" y="337.0" text-anchor="middle" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#fff" font-weight="800">2</text>
+  <text x="114" y="302" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#f8fafc" font-weight="800">找到订阅地址</text>
+  <text x="114" y="336" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#cbd5e1">仪表盘里找到「订阅链接/订阅地址」</text>
+
+  <rect x="24" y="404" width="672" height="128" rx="18" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <circle cx="68" cy="468.0" r="30" fill="#06b6d4"/>
+  <text x="68" y="479.0" text-anchor="middle" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#fff" font-weight="800">3</text>
+  <text x="114" y="444" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#f8fafc" font-weight="800">点复制</text>
+  <text x="114" y="478" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#cbd5e1">点「复制」按钮，确保整段链接都复制到</text>
+
+  <rect x="24" y="546" width="672" height="128" rx="18" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <circle cx="68" cy="610.0" r="30" fill="#06b6d4"/>
+  <text x="68" y="621.0" text-anchor="middle" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#fff" font-weight="800">4</text>
+  <text x="114" y="586" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#f8fafc" font-weight="800">打开 Clash Meta</text>
+  <text x="114" y="620" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#cbd5e1">回到手机桌面，打开刚安装的客户端</text>
+
+  <rect x="24" y="688" width="672" height="128" rx="18" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <circle cx="68" cy="752.0" r="30" fill="#06b6d4"/>
+  <text x="68" y="763.0" text-anchor="middle" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#fff" font-weight="800">5</text>
+  <text x="114" y="728" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#f8fafc" font-weight="800">添加配置 / 订阅</text>
+  <text x="114" y="762" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#cbd5e1">点 + 或「配置」→ 选 New Profile / URL</text>
+
+  <rect x="24" y="830" width="672" height="128" rx="18" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <circle cx="68" cy="894.0" r="30" fill="#06b6d4"/>
+  <text x="68" y="905.0" text-anchor="middle" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#fff" font-weight="800">6</text>
+  <text x="114" y="870" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#f8fafc" font-weight="800">粘贴链接并保存</text>
+  <text x="114" y="904" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#cbd5e1">Name 随便填，URL 粘贴订阅，点保存</text>
+
+  <rect x="24" y="972" width="672" height="128" rx="18" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <circle cx="68" cy="1036.0" r="30" fill="#06b6d4"/>
+  <text x="68" y="1047.0" text-anchor="middle" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#fff" font-weight="800">7</text>
+  <text x="114" y="1012" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#f8fafc" font-weight="800">更新订阅</text>
+  <text x="114" y="1046" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#cbd5e1">在配置旁点更新/云朵图标，等成功</text>
+
+  <rect x="24" y="1114" width="672" height="128" rx="18" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <circle cx="68" cy="1178.0" r="30" fill="#06b6d4"/>
+  <text x="68" y="1189.0" text-anchor="middle" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#fff" font-weight="800">8</text>
+  <text x="114" y="1154" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#f8fafc" font-weight="800">选择节点</text>
+  <text x="114" y="1188" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#cbd5e1">进入代理列表，点选一个可用节点</text>
+
+  <rect x="24" y="1256" width="672" height="128" rx="18" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <circle cx="68" cy="1320.0" r="30" fill="#06b6d4"/>
+  <text x="68" y="1331.0" text-anchor="middle" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#fff" font-weight="800">9</text>
+  <text x="114" y="1296" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#f8fafc" font-weight="800">开启代理</text>
+  <text x="114" y="1330" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#cbd5e1">回到首页打开开关 / 启动 VPN 授权</text>
+
+  <rect x="24" y="1398" width="672" height="128" rx="18" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <circle cx="68" cy="1462.0" r="30" fill="#06b6d4"/>
+  <text x="68" y="1473.0" text-anchor="middle" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#fff" font-weight="800">10</text>
+  <text x="114" y="1438" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#f8fafc" font-weight="800">验证是否成功</text>
+  <text x="114" y="1472" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#cbd5e1">打开网页或测速，能访问即成功</text>
+
+</svg>
