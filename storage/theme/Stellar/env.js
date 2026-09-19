@@ -26,8 +26,8 @@ window.settings = {
   // 站点名称（浏览器标题、侧边栏品牌名）
   title: 'XBoard',
 
-  // 站点简介
-  description: '高速稳定的网络加速服务',
+  // 站点简介（登录/注册品牌副文案；勿用空洞 slogan）
+  description: '安全连接，畅行全球',
 
   // ==========================================================
   // 资源与主题
@@ -36,13 +36,14 @@ window.settings = {
   // 静态资源目录（保留默认 '/assets' 即可）
   assets_path: '/theme/Stellar/assets',
 
-  // 主题主色：'default'（默认蓝紫）或 'green' 'orange' 'red' 等
+  // 主题主色：'default'（默认蓝）或 'green' 'orange' 'red' 等
+  // 登录页主 CTA 另由 auth-atmosphere.css 覆盖为青绿，避免廉价紫配白
   theme: {
     color: 'default',
   },
 
   // 前端展示的主题版本号
-  version: '1.0.0',
+  version: '1.0.1',
 
   // 背景图片 URL（留空用默认）
   // 注意：此字段为旧版配置，仅用于 auth 页面背景，已由下方 background 配置取代。
@@ -58,6 +59,7 @@ window.settings = {
 
   // 页头自定义代码（注入到 <head> 标签尾部）
   // 支持 <script>、<style>、<link>、<meta> 等标签
+  // auth 视觉主文件由 dashboard.blade.php 直接引入 auth-atmosphere.css
   header_code: '',
 
   // 页脚自定义代码（在页面底部渲染）

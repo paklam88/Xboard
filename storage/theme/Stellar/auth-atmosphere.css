@@ -1,0 +1,237 @@
+/**
+ * XBoard / Stellar — auth pages (login / register / forget)
+ * Soft atmosphere, no harsh black|white split panel.
+ * Loaded from dashboard.blade.php; cache-bust via ?v= query if needed.
+ */
+
+:root {
+  --xb-auth-accent: #0e7490;
+  --xb-auth-accent-soft: #0891b2;
+  --xb-auth-ink: #0f172a;
+  --xb-auth-muted: #64748b;
+  --xb-auth-panel: rgba(255, 255, 255, 0.78);
+  --xb-auth-panel-border: rgba(15, 23, 42, 0.06);
+  --xb-auth-glow-a: rgba(14, 165, 233, 0.16);
+  --xb-auth-glow-b: rgba(45, 212, 191, 0.12);
+  --xb-auth-base-0: #eef6f9;
+  --xb-auth-base-1: #e8eef4;
+  --xb-auth-base-2: #f4f7fa;
+}
+
+html.dark,
+.dark {
+  --xb-auth-accent: #22d3ee;
+  --xb-auth-accent-soft: #67e8f9;
+  --xb-auth-ink: #f1f5f9;
+  --xb-auth-muted: #94a3b8;
+  --xb-auth-panel: rgba(15, 23, 42, 0.72);
+  --xb-auth-panel-border: rgba(148, 163, 184, 0.14);
+  --xb-auth-glow-a: rgba(34, 211, 238, 0.14);
+  --xb-auth-glow-b: rgba(56, 189, 248, 0.1);
+  --xb-auth-base-0: #0b1220;
+  --xb-auth-base-1: #111827;
+  --xb-auth-base-2: #0f172a;
+}
+
+/* Full-viewport atmosphere — replaces flat split */
+.auth-page {
+  min-height: 100vh !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background:
+    radial-gradient(ellipse 90% 70% at 12% 8%, var(--xb-auth-glow-a), transparent 55%),
+    radial-gradient(ellipse 80% 60% at 92% 88%, var(--xb-auth-glow-b), transparent 52%),
+    linear-gradient(168deg, var(--xb-auth-base-0) 0%, var(--xb-auth-base-1) 48%, var(--xb-auth-base-2) 100%) !important;
+  animation: xb-auth-breathe 18s ease-in-out infinite alternate;
+}
+
+@keyframes xb-auth-breathe {
+  from {
+    filter: saturate(1);
+  }
+  to {
+    filter: saturate(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-page {
+    animation: none;
+  }
+}
+
+/* Hide legacy left black brand column */
+.auth-page .auth-brand {
+  display: none !important;
+}
+
+/* Soft single composition — not a card stack */
+.auth-page .auth-container {
+  display: block !important;
+  width: min(100%, 440px) !important;
+  max-width: 440px !important;
+  min-height: 0 !important;
+  margin: 28px 16px !important;
+  background: var(--xb-auth-panel) !important;
+  border: 1px solid var(--xb-auth-panel-border) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 18px 48px rgba(15, 23, 42, 0.08) !important;
+  backdrop-filter: blur(18px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  overflow: visible !important;
+}
+
+html.dark .auth-page .auth-container,
+.dark .auth-page .auth-container {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 22px 56px rgba(0, 0, 0, 0.35) !important;
+}
+
+.auth-page .auth-form-wrap {
+  padding: 40px 36px 32px !important;
+  max-height: none !important;
+  align-items: stretch !important;
+}
+
+.auth-page .auth-form-inner {
+  max-width: 100% !important;
+}
+
+/* Brand always visible (was mobile-only when left panel existed) */
+.auth-page .auth-mobile-brand {
+  display: block !important;
+  text-align: center !important;
+  margin: 0 0 28px !important;
+}
+
+.auth-page .auth-mobile-brand-title {
+  font-size: clamp(2rem, 5vw, 2.75rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.05 !important;
+  color: var(--xb-auth-ink) !important;
+  opacity: 1 !important;
+  background: linear-gradient(120deg, var(--xb-auth-ink) 20%, var(--xb-auth-accent-soft) 120%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.auth-page .auth-mobile-brand-desc {
+  margin-top: 10px !important;
+  font-size: 0.95rem !important;
+  color: var(--xb-auth-muted) !important;
+  line-height: 1.5 !important;
+}
+
+/* Welcome line under brand */
+.auth-page .auth-title {
+  display: block !important;
+  font-size: 1.25rem !important;
+  font-weight: 650 !important;
+  color: var(--xb-auth-ink) !important;
+  margin-bottom: 6px !important;
+  text-align: left !important;
+}
+
+.auth-page .auth-subtitle {
+  display: block !important;
+  font-size: 0.9rem !important;
+  color: var(--xb-auth-muted) !important;
+  margin-bottom: 28px !important;
+  text-align: left !important;
+}
+
+.auth-page .auth-top-actions {
+  display: flex !important;
+  margin-bottom: 8px !important;
+}
+
+.auth-page .logo-placeholder {
+  background: linear-gradient(135deg, #0e7490, #0284c7) !important;
+}
+
+.auth-page .auth-link {
+  color: var(--xb-auth-accent) !important;
+}
+
+/* Primary CTA — cyan/teal, not purple */
+.auth-page .n-button--primary-type {
+  --n-color: #0e7490 !important;
+  --n-color-hover: #0f766e !important;
+  --n-color-pressed: #115e59 !important;
+  --n-color-focus: #0e7490 !important;
+  --n-border: 1px solid #0e7490 !important;
+  --n-border-hover: 1px solid #0f766e !important;
+  --n-border-pressed: 1px solid #115e59 !important;
+  --n-border-focus: 1px solid #0e7490 !important;
+  --n-text-color: #fff !important;
+  --n-ripple-color: #0e7490 !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 8px 20px rgba(14, 116, 144, 0.22);
+}
+
+.auth-page .n-button--primary-type:hover {
+  transform: translateY(-1px);
+}
+
+html.dark .auth-page .n-button--primary-type,
+.dark .auth-page .n-button--primary-type {
+  --n-color: #0891b2 !important;
+  --n-color-hover: #06b6d4 !important;
+  --n-color-pressed: #0e7490 !important;
+  --n-border: 1px solid #0891b2 !important;
+  --n-border-hover: 1px solid #06b6d4 !important;
+  --n-border-pressed: 1px solid #0e7490 !important;
+  --n-border-focus: 1px solid #0891b2 !important;
+  box-shadow: 0 8px 22px rgba(8, 145, 178, 0.28);
+}
+
+/* Keep email verify / code UI readable */
+.auth-page .n-input-group,
+.auth-page .email-input-group {
+  width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .auth-page {
+    align-items: stretch !important;
+  }
+
+  .auth-page .auth-container {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 100vh !important;
+    border-radius: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none;
+  }
+
+  .auth-page .auth-form-wrap {
+    padding: 36px 20px 28px !important;
+  }
+
+  /* Theme originally hid desktop titles on mobile — keep brand + welcome */
+  .auth-page .auth-title,
+  .auth-page .auth-subtitle {
+    display: block !important;
+  }
+
+  .auth-page .auth-login-form .n-form-item-label,
+  .auth-page .auth-register-form .n-form-item-label {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .auth-page .auth-form-wrap {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
