@@ -12,6 +12,7 @@
     html:not(.dark) .stellar-page-loader{background:#f8fafc}
   </style>
   <link rel="stylesheet" href="/theme/{{ $theme }}/auth-atmosphere.css?v=20260919g" />
+  <link rel="stylesheet" href="/theme/{{ $theme }}/knowledge-content.css?v=20260919a" />
   <script>
     window.routerBase = '/';
     window.settings = window.settings || {};

@@ -1,0 +1,42 @@
+/**
+ * Knowledge / tutorial content images — keep phone screenshots readable.
+ * Inline HTML often uses width:100%; without a cap they fill the whole pane.
+ */
+.doc-article,
+.doc-article .prose,
+.knowledge-detail-page .prose {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.doc-article img,
+.doc-article .prose img,
+.knowledge-detail-page .prose img,
+.prose img {
+  max-width: min(100%, 420px) !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: min(70vh, 720px) !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 12px auto !important;
+  border-radius: 12px;
+}
+
+/* Wider shots (desktop panels) still capped, but allow a bit more */
+.doc-article img[src*="desktop"],
+.doc-article img[src*="web"],
+.doc-article img[alt*="桌面"],
+.doc-article img[alt*="电脑"] {
+  max-width: min(100%, 720px) !important;
+}
+
+@media (max-width: 640px) {
+  .doc-article img,
+  .doc-article .prose img,
+  .knowledge-detail-page .prose img,
+  .prose img {
+    max-width: 100% !important;
+    max-height: min(65vh, 640px) !important;
+  }
+}
